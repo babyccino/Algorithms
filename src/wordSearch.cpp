@@ -21,6 +21,9 @@ Solution is based on DFS.
 
 */
 
+#include <vector>
+#include <string>
+
 bool existInner(std::vector<std::vector<char>>& board, const std::string& word,
   const int& i, const int& j, int pos) {
   // visited cells are marked with '*'
