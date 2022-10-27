@@ -1,0 +1,12 @@
+{
+	"name": "leetcode",
+	"version": "1.0.0",
+	"scripts": {
+		"start": "node out/app.js",
+		"prestart": "npm run build",
+		"build": "tsc"
+	},
+	"dependencies": {
+		"typescript": "^4.8.4"
+	}
+}
