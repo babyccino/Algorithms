@@ -1,2 +1,3 @@
 # Algorithms
-Algorithms I've done for Leetcode problems.
+
+Solutions to Leetcode problems.

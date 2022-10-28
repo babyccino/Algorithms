@@ -1,9 +1,0 @@
-{
-	"compilerOptions": {
-		"outDir": "./out",
-		"rootDir": "./",
-		"sourceMap": true,
-		"moduleResolution": "node",
-		"target": "es5"
-	}
-}
