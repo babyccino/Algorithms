@@ -33,7 +33,7 @@ export function printTree(head: TreeNode | null): string {
 	let spacing = 0
 	let pow = 0
 	for (let i = nodeArrayArray.length - 1; i >= 0; --i) {
-		let str = "" + " " //.repeat(spacing)
+		let str = " " //.repeat(spacing)
 		spacing += Math.pow(2, pow++)
 
 		for (const el of nodeArrayArray[i]) str += (el === null ? " " : el) + " " //.repeat(spacing)

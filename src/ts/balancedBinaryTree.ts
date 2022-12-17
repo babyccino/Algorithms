@@ -1,4 +1,4 @@
-import { TreeNode, arrayToBinaryTree, printTree } from "./binaryTree"
+import { TreeNode } from "./binaryTree"
 
 function _isBalanced(root: TreeNode | null): [boolean, number] {
 	if (!root) return [true, 0]
