@@ -1,6 +1,6 @@
 type Entry = "." | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
 type Row = Array<Entry>
-type Check = number
+type Bitmask = number
 type Board = Array<Row>
 
 function indexes(index: number): [number, number, number] {
@@ -16,9 +16,9 @@ const bitUnset = (bit: number, index: number): number => bit & ~(1 << index)
 function solveSudoku(board: Board): void {
 	// 1111111111 in binary corresponding to a fully set bitmask
 	const ones = 1024 - 1
-	const rowValidNums: Check[] = new Array(9).fill(ones)
-	const columnValidNums: Check[] = new Array(9).fill(ones)
-	const squareValidNums: Check[] = new Array(9).fill(ones)
+	const rowValidNums: Bitmask[] = new Array(9).fill(ones)
+	const columnValidNums: Bitmask[] = new Array(9).fill(ones)
+	const squareValidNums: Bitmask[] = new Array(9).fill(ones)
 
 	// populate the bitmasks with the already set numbers
 	for (let index = 0; index < 81; ++index) {
@@ -68,9 +68,9 @@ function solveSudoku(board: Board): void {
 
 function solveSudokuInline(board: Board): void {
 	// 1111111111 in binary corresponding to a fully set bitmask
-	const rowValidNums: Check[] = new Array(9).fill(1023)
-	const columnValidNums: Check[] = new Array(9).fill(1023)
-	const squareValidNums: Check[] = new Array(9).fill(1023)
+	const rowValidNums: Bitmask[] = new Array(9).fill(1023)
+	const columnValidNums: Bitmask[] = new Array(9).fill(1023)
+	const squareValidNums: Bitmask[] = new Array(9).fill(1023)
 
 	// populate the bitmasks with the already set numbers
 	for (let index = 0; index < 81; ++index) {
