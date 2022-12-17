@@ -65,3 +65,61 @@ function solveSudoku(board: Board): void {
 
 	dfs(0)
 }
+
+function solveSudokuInline(board: Board): void {
+	// 1111111111 in binary corresponding to a fully set bitmask
+	const rowValidNums: Check[] = new Array(9).fill(1023)
+	const columnValidNums: Check[] = new Array(9).fill(1023)
+	const squareValidNums: Check[] = new Array(9).fill(1023)
+
+	// populate the bitmasks with the already set numbers
+	for (let index = 0; index < 81; ++index) {
+		const i = index % 9
+		const j = Math.floor(index / 9)
+		const square = Math.floor(i / 3) + 3 * Math.floor(j / 3)
+
+		if (board[i][j] === ".") continue
+		const num = parseInt(board[i][j])
+		rowValidNums[j] &= ~(1 << num)
+		columnValidNums[i] &= ~(1 << num)
+		squareValidNums[square] &= ~(1 << num)
+	}
+
+	function dfs(index: number): boolean {
+		if (index === 81) return true
+
+		const i = index % 9
+		const j = Math.floor(index / 9)
+		const square = Math.floor(i / 3) + 3 * Math.floor(j / 3)
+
+		// skip to the next spot if the number is already set
+		if (board[i][j] !== ".") return dfs(index + 1)
+
+		// bitmask corresponding to all the valid numbers for the current position on the board
+		const bitmask =
+			rowValidNums[j] & columnValidNums[i] & squareValidNums[square]
+		for (let num = 1; num < 10; ++num) {
+			if (!((1 << num) & bitmask)) continue
+
+			// set the current position to the first valid number
+			board[i][j] = num.toString() as Entry
+			rowValidNums[j] &= ~(1 << num)
+			columnValidNums[i] &= ~(1 << num)
+			squareValidNums[square] &= ~(1 << num)
+
+			// do a dfs with the assumed number
+			// if the dfs finds a solution return true
+			if (dfs(index + 1)) return true
+
+			// return the bitmasks to their original state
+			rowValidNums[j] |= 1 << num
+			columnValidNums[i] |= 1 << num
+			squareValidNums[square] |= 1 << num
+		}
+		// if no solution was found unset the number
+		board[i][j] = "."
+		return false
+	}
+
+	dfs(0)
+}
